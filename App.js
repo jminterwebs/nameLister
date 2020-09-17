@@ -32,6 +32,14 @@ const App: () => React$Node = () => {
     setAge('')
   }
 
+  const deletePerson = (person) => {
+    const removedList = personList.filter((_,index) => {
+      return index !== person.index;
+    });
+
+    setPersonList(removedList);
+  }
+
   return (
     <SafeAreaView>
       <View>
@@ -52,6 +60,10 @@ const App: () => React$Node = () => {
             <View key={index}>
               <Text>Name: {person.item.name}</Text>
               <Text>Age: {person.item.age}</Text>
+              <Button
+                title="Remove Person"
+                onPress={() => deletePerson(person)}
+              />
             </View>
 
           )}
