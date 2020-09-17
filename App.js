@@ -10,14 +10,20 @@ import React, {useState} from 'react';
 import {
   SafeAreaView,
   View,
-  Text, TextInput, Button, FlatList 
-  
+  Text,
+  TextInput,
+  Button,
+  FlatList,
+  Modal,
+  TouchableHighlight  
 } from 'react-native';
 
 const App: () => React$Node = () => {
   const [name, setName] = useState('');
   const [age, setAge] = useState('');
   const [personList, setPersonList] = useState([])
+  const [toggleModal, setToggleModal] = useState(false)
+  const [editName, setEditName] = useState('')
 
   const handleNameChange = (text) => {
     setName(text);
@@ -41,7 +47,12 @@ const App: () => React$Node = () => {
   }
 
   const updatePerson = (person) => {
+      setToggleModal(!toggleModal)
+      setEditName(person.item.name)
+  }
 
+  const closeModal = () => {
+    setToggleModal(!toggleModal)
   }
 
   return (
@@ -78,6 +89,23 @@ const App: () => React$Node = () => {
         />
       </View>
 
+
+      <Modal animationType="slide" transparent={false} visible={toggleModal}>
+        <View>
+          <View>
+            <Text>Name:</Text>
+            <TextInput
+              placeholder={editName}
+              onChangeText={(text) => handleEditName(text)}
+            />
+          </View>
+        
+        
+          <TouchableHighlight onPress={closeModal}>
+            <Text>Close</Text>
+          </TouchableHighlight>
+        </View>
+      </Modal>
     </SafeAreaView>
   );
 };
