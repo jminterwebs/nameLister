@@ -32,49 +32,75 @@ const App: () => React$Node = () => {
   };
   const handleAgeChange = (text) => {
     setAge(text);
-  }
+  };
 
-  const addPerson = ( ) => {
+  const addPerson = () => {
     setPersonList([...personList, {name: name, age: age}]);
 
     setName('');
     setAge('');
-    console.log(name)
+    console.log(name);
   }
 
   const deletePerson = (person) => {
-    const removedList = personList.filter((_,index) => {
-      return index != person.index;
+    const removedList = personList.filter((_, index) => {
+      return index !== person.index;
     });
 
     setPersonList(removedList);
-  }
+  };
 
   const updatePerson = (person) => {
-      setToggleModal(!toggleModal)
-      setEditName(person.item.name)
-      setEditAge(person.item.age)
-      setPersonIndex(person.index)
-  }
+    setToggleModal(!toggleModal);
+    setEditName(person.item.name);
+    setEditAge(person.item.age);
+    setPersonIndex(person.index);
+  };
 
   const handleEditName = (text) => {
-    setEditName(text)
-  }  
+    setEditName(text);
+  };
 
   const handleEditAge = (text) => {
-    setEditAge(text)
-  }
+    setEditAge(text);
+  };
 
   const closeModal = () => {
-    setToggleModal(!toggleModal)
-  }
+    setToggleModal(!toggleModal);
+  };
 
   const editPerson = () => {
     personList[personIndex].name = editName;
     personList[personIndex].age = editAge;
     setPersonList(personList);
     closeModal();
-  }
+  };
+
+  const updateModal = (
+    <Modal animationType="slide" transparent={false} visible={toggleModal}>
+      <View>
+        <View>
+          <Text>Name:</Text>
+          <TextInput
+            placeholder={editName}
+            onChangeText={(text) => handleEditName(text)}
+            value={editName}
+          />
+          <TextInput
+            placeholder={editAge}
+            onChangeText={(text) => handleEditAge(text)}
+            value={editAge}
+          />
+        </View>
+        <TouchableHighlight onPress={editPerson}>
+          <Text>Update Person</Text>
+        </TouchableHighlight>
+        <TouchableHighlight onPress={closeModal}>
+          <Text>Close</Text>
+        </TouchableHighlight>
+      </View>
+    </Modal>
+  );
 
   return (
     <SafeAreaView>
@@ -107,35 +133,10 @@ const App: () => React$Node = () => {
                 onPress={() => updatePerson(person)}
               />
             </View>
-
           )}
         />
       </View>
-
-
-      <Modal animationType="slide" transparent={false} visible={toggleModal}>
-        <View>
-          <View>
-            <Text>Name:</Text>
-            <TextInput
-              placeholder={editName}
-              onChangeText={(text) => handleEditName(text)}
-              value={editName}
-            />
-            <TextInput
-              placeholder={editAge}
-              onChangeText={(text) => handleEditAge(text)}
-              value={editAge}
-            />
-          </View>
-          <TouchableHighlight onPress={editPerson}>
-            <Text>Update Person</Text>
-          </TouchableHighlight>
-          <TouchableHighlight onPress={closeModal}>
-            <Text>Close</Text>
-          </TouchableHighlight>
-        </View>
-      </Modal>
+      {updateModal}
     </SafeAreaView>
   );
 };
