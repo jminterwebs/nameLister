@@ -40,6 +40,10 @@ const App: () => React$Node = () => {
     setPersonList(removedList);
   }
 
+  const updatePerson = (person) => {
+
+  }
+
   return (
     <SafeAreaView>
       <View>
@@ -63,6 +67,10 @@ const App: () => React$Node = () => {
               <Button
                 title="Remove Person"
                 onPress={() => deletePerson(person)}
+              />
+              <Button 
+                title="Edit Person"
+                onPress={() => updatePerson(person)}
               />
             </View>
 
