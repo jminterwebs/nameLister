@@ -15,7 +15,7 @@ import {
   Button,
   FlatList,
   Modal,
-  TouchableHighlight  
+  TouchableHighlight,
 } from 'react-native';
 
 const App: () => React$Node = () => {
@@ -128,7 +128,7 @@ const App: () => React$Node = () => {
                 title="Remove Person"
                 onPress={() => deletePerson(person)}
               />
-              <Button 
+              <Button
                 title="Edit Person"
                 onPress={() => updatePerson(person)}
               />
