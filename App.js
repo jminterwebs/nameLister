@@ -51,6 +51,10 @@ const App: () => React$Node = () => {
       setEditName(person.item.name)
   }
 
+  const handleEditName = (text) => {
+    setEditName(text)
+  }  
+
   const closeModal = () => {
     setToggleModal(!toggleModal)
   }
@@ -98,6 +102,8 @@ const App: () => React$Node = () => {
               placeholder={editName}
               onChangeText={(text) => handleEditName(text)}
             />
+
+
           </View>
         
         
