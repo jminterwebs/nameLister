@@ -120,10 +120,12 @@ const App: () => React$Node = () => {
             <TextInput
               placeholder={editName}
               onChangeText={(text) => handleEditName(text)}
+              value={editName}
             />
             <TextInput
               placeholder={editAge}
               onChangeText={(text) => handleEditAge(text)}
+              value={editAge}
             />
           </View>
           <TouchableHighlight onPress={editPerson}>
