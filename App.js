@@ -13,7 +13,6 @@ import {
   View,
   Text,
   TextInput,
-  Button,
   FlatList,
   Modal,
   TouchableHighlight,
@@ -79,25 +78,32 @@ const App: () => React$Node = () => {
 
   const updateModal = (
     <Modal animationType="slide" transparent={false} visible={toggleModal}>
-      <View>
+      <View style={styles.modalContainer}>
         <View>
-          <Text>Name:</Text>
-          <TextInput
-            placeholder={editName}
-            onChangeText={(text) => handleEditName(text)}
-            value={editName}
-          />
-          <TextInput
-            placeholder={editAge}
-            onChangeText={(text) => handleEditAge(text)}
-            value={editAge}
-          />
+          <View style={styles.inputWrapper}>
+            <Text>Name:</Text>
+            <TextInput
+              placeholder={editName}
+              onChangeText={(text) => handleEditName(text)}
+              value={editName}
+            />
+          </View>
+          <View style={styles.inputWrapper}>
+            <Text>Age:</Text>
+            <TextInput
+              placeholder={editAge}
+              onChangeText={(text) => handleEditAge(text)}
+              value={editAge}
+            />
+          </View>
         </View>
-        <TouchableHighlight onPress={editPerson}>
-          <Text>Update Person</Text>
+        <TouchableHighlight
+          style={(styles.listButton, styles.updateButton)}
+          onPress={editPerson}>
+          <Text style={styles.updateText}>Update Person</Text>
         </TouchableHighlight>
         <TouchableHighlight onPress={closeModal}>
-          <Text>Close</Text>
+          <Text style={styles.closeButton}>Close</Text>
         </TouchableHighlight>
       </View>
     </Modal>
@@ -108,13 +114,13 @@ const App: () => React$Node = () => {
       <View style={styles.container}>
         <View style={styles.inputWrapper}>
           <TextInput
-            style={styles.inputbox}
+            style={styles.inputBox}
             placeholder="Enter Name:"
             onChangeText={(text) => handleNameChange(text)}
             value={name}
           />
           <TextInput
-            style={styles.inputbox}
+            style={styles.inputBox}
             placeholder="Enter Age"
             onChangeText={(text) => handleAgeChange(text)}
             value={age}
@@ -124,22 +130,25 @@ const App: () => React$Node = () => {
           <Text style={styles.submitButtonText}>Submit Name and Age</Text>
         </TouchableHighlight>
       </View>
-      <View>
+      <View style={styles.list}>
         <FlatList
-          style={styles.list}
           data={personList}
           renderItem={(person, index) => (
             <View key={index} style={styles.listItem}>
               <View style={styles.nameText}>
-                <Text>Name: {person.item.name}</Text>
-                <Text>Age: {person.item.age}</Text>
+                <Text style={styles.listText}>Name: {person.item.name}</Text>
+                <Text style={styles.listText}>Age: {person.item.age}</Text>
               </View>
               <View style={styles.editButtons}>
-                <TouchableHighlight onPress={() => deletePerson(person)}>
-                  <Text>Remove Person</Text>
-                </TouchableHighlight>                    
-                <TouchableHighlight onPress={() => updatePerson(person)}>
-                  <Text> Edit Person</Text>
+                <TouchableHighlight
+                  style={(styles.listButton, styles.deleteButton)}
+                  onPress={() => deletePerson(person)}>
+                  <Text style={styles.deleteText}>Remove Person</Text>
+                </TouchableHighlight>
+                <TouchableHighlight
+                  style={(styles.listButton, styles.updateButton)}
+                  onPress={() => updatePerson(person)}>
+                  <Text style={styles.updateText}>Edit Person</Text>
                 </TouchableHighlight>
               </View>
             </View>
@@ -154,37 +163,73 @@ const App: () => React$Node = () => {
 const styles = StyleSheet.create({
   container: {
     marginTop: 25,
-  flexDirection: 'column',
-  justifyContent: 'center',
-  alignItems: 'center',
-      
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   inputWrapper: {
     marginBottom: 10,
     flexDirection: 'row',
     justifyContent: 'space-evenly',
-    width: 250
+    width: 250,
   },
-  inputbox: {
-    
-    
+  inputBox: {
+    fontSize: 15,
+    color: 'black',
   },
   submitButtonText: {
     color: 'white',
     backgroundColor: 'green',
     padding: 10,
     textAlign: 'center',
-    width: 200
+    width: 200,
+  },
+  list: {
+    marginTop: 15,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   listItem: {
     flexDirection: 'row',
-    justifyContent: 'center',
+    justifyContent: 'space-evenly',
     alignItems: 'center',
     width: 300,
-    backgroundColor: 'grey'
+    marginTop: 5,
+    marginBottom: 5,
+  },
+  listText: {
+    fontSize: 15,
+    paddingVertical: 5,
+  },
+  listButton: {
+    paddingVertical: 5,
+  },
+  deleteButton: {
+    backgroundColor: 'red',
+    padding: 5,
+  },
+  deleteText: {
+    color: 'white',
+    fontSize: 15,
+  },
+  updateText: {
+    color: 'white',
+    fontSize: 15,
+    textAlign: 'center',
+  },
+  updateButton: {
+    backgroundColor: 'orange',
+    padding: 5,
+    textAlign: 'center',
+  },
+  modalContainer: {
+    marginTop: 50,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  closeButton: {
+    marginTop: 5,
   }
-
-
-})
-
+});
 export default App;
