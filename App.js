@@ -24,6 +24,7 @@ const App: () => React$Node = () => {
   const [personList, setPersonList] = useState([])
   const [toggleModal, setToggleModal] = useState(false)
   const [editName, setEditName] = useState('')
+  const [editAge, setEditAge] = useState('')
 
   const handleNameChange = (text) => {
     setName(text);
@@ -49,11 +50,16 @@ const App: () => React$Node = () => {
   const updatePerson = (person) => {
       setToggleModal(!toggleModal)
       setEditName(person.item.name)
+      setEditAge(person.item.age)
   }
 
   const handleEditName = (text) => {
     setEditName(text)
   }  
+
+  const handleEditAge = (text) => {
+    setEditAge(text)
+  }
 
   const closeModal = () => {
     setToggleModal(!toggleModal)
@@ -102,11 +108,11 @@ const App: () => React$Node = () => {
               placeholder={editName}
               onChangeText={(text) => handleEditName(text)}
             />
-
-
+            <TextInput
+              placeholder={editAge}
+              onChangeText={(text) => handleEditAge(text)}
+            />
           </View>
-        
-        
           <TouchableHighlight onPress={closeModal}>
             <Text>Close</Text>
           </TouchableHighlight>
