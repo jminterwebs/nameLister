@@ -10,25 +10,35 @@ import React, {useState} from 'react';
 import {
   SafeAreaView,
   View,
-  Text, TextInput
+  Text, TextInput, 
   
 } from 'react-native';
 
 const App: () => React$Node = () => {
-  const [text, setName] = useState('');
+  const [name, setName] = useState('');
+  const [age, setAge] = useState('');
 
-  const handgleNameChange = (text) => {
+  const handleNameChange = (text) => {
     setName(text);
   };
-  
+  const handleAgeChange = (text) => {
+    setAge(text);
+  }
+
   return (
     <View>
       <SafeAreaView>
+        <View>
         <TextInput
           placeholder="Enter Name:"
-          onChangeText={(text) => handgleNameChange(text)}
+          onChangeText={(text) => handleNameChange(text)}
+        />
+        <TextInput
+          placeholder="Enter Age"
+          onChangeText={(text) => handleAgeChange(text)}
         />
         <TextInput>Hello</TextInput>
+                </View>
       </SafeAreaView>
     </View>
   );
