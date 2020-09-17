@@ -25,6 +25,7 @@ const App: () => React$Node = () => {
   const [toggleModal, setToggleModal] = useState(false)
   const [editName, setEditName] = useState('')
   const [editAge, setEditAge] = useState('')
+  const [personIndex, setPersonIndex] = useState('');
 
   const handleNameChange = (text) => {
     setName(text);
@@ -35,13 +36,15 @@ const App: () => React$Node = () => {
 
   const addPerson = ( ) => {
     setPersonList([...personList, {name: name, age: age}]);
-    setName('')
-    setAge('')
+
+    setName('');
+    setAge('');
+    console.log(name)
   }
 
   const deletePerson = (person) => {
     const removedList = personList.filter((_,index) => {
-      return index !== person.index;
+      return index != person.index;
     });
 
     setPersonList(removedList);
@@ -51,6 +54,7 @@ const App: () => React$Node = () => {
       setToggleModal(!toggleModal)
       setEditName(person.item.name)
       setEditAge(person.item.age)
+      setPersonIndex(person.index)
   }
 
   const handleEditName = (text) => {
@@ -65,16 +69,25 @@ const App: () => React$Node = () => {
     setToggleModal(!toggleModal)
   }
 
+  const editPerson = () => {
+    personList[personIndex].name = editName;
+    personList[personIndex].age = editAge;
+    setPersonList(personList);
+    closeModal();
+  }
+
   return (
     <SafeAreaView>
       <View>
         <TextInput
           placeholder="Enter Name:"
           onChangeText={(text) => handleNameChange(text)}
+          value={name}
         />
         <TextInput
           placeholder="Enter Age"
           onChangeText={(text) => handleAgeChange(text)}
+          value={age}
         />
         <Button title="Submit Name and Age" onPress={addPerson} />
       </View>
@@ -113,6 +126,9 @@ const App: () => React$Node = () => {
               onChangeText={(text) => handleEditAge(text)}
             />
           </View>
+          <TouchableHighlight onPress={editPerson}>
+            <Text>Update Person</Text>
+          </TouchableHighlight>
           <TouchableHighlight onPress={closeModal}>
             <Text>Close</Text>
           </TouchableHighlight>
