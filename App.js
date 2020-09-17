@@ -21,10 +21,10 @@ import {
 const App: () => React$Node = () => {
   const [name, setName] = useState('');
   const [age, setAge] = useState('');
-  const [personList, setPersonList] = useState([])
-  const [toggleModal, setToggleModal] = useState(false)
-  const [editName, setEditName] = useState('')
-  const [editAge, setEditAge] = useState('')
+  const [personList, setPersonList] = useState([]);
+  const [toggleModal, setToggleModal] = useState(false);
+  const [editName, setEditName] = useState('');
+  const [editAge, setEditAge] = useState('');
   const [personIndex, setPersonIndex] = useState('');
 
   const handleNameChange = (text) => {
@@ -40,7 +40,7 @@ const App: () => React$Node = () => {
     setName('');
     setAge('');
     console.log(name);
-  }
+  };
 
   const deletePerson = (person) => {
     const removedList = personList.filter((_, index) => {
