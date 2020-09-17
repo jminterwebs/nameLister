@@ -10,7 +10,7 @@ import React, {useState} from 'react';
 import {
   SafeAreaView,
   View,
-  Text, TextInput, Button 
+  Text, TextInput, Button, FlatList 
   
 } from 'react-native';
 
@@ -33,9 +33,8 @@ const App: () => React$Node = () => {
   }
 
   return (
-    <View>
-      <SafeAreaView>
-        <View>
+    <SafeAreaView>
+      <View>
         <TextInput
           placeholder="Enter Name:"
           onChangeText={(text) => handleNameChange(text)}
@@ -44,14 +43,22 @@ const App: () => React$Node = () => {
           placeholder="Enter Age"
           onChangeText={(text) => handleAgeChange(text)}
         />
-        <Button
-          title="Submit Name and Age"
-          onPress={addPerson}
+        <Button title="Submit Name and Age" onPress={addPerson} />
+      </View>
+      <View>
+        <FlatList
+          data={personList}
+          renderItem={(person, index) => (
+            <View key={index}>
+              <Text>Name: {person.item.name}</Text>
+              <Text>Age: {person.item.age}</Text>
+            </View>
+
+          )}
         />
-        
-                </View>
-      </SafeAreaView>
-    </View>
+      </View>
+
+    </SafeAreaView>
   );
 };
 
