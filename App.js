@@ -37,7 +37,7 @@ const App: () => React$Node = () => {
           placeholder="Enter Age"
           onChangeText={(text) => handleAgeChange(text)}
         />
-        <TextInput>Hello</TextInput>
+        
                 </View>
       </SafeAreaView>
     </View>
