@@ -230,6 +230,6 @@ const styles = StyleSheet.create({
   },
   closeButton: {
     marginTop: 5,
-  }
+  },
 });
 export default App;
