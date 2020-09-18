@@ -1,4 +1,4 @@
-Nameliseter is a simple react native app. It allows a user enter a name and age. A user can then delete the item from a list or update a list item.
+Namelister is a simple react native app. It allows a user enter a name and age. A user can then delete the item from a list or update a list item.
 
 ## Set up and install instructions
 
